@@ -1,0 +1,44 @@
+{
+  "scores": [
+    {
+      "id": 1,
+      "points": "5000",
+      "user": "Miguel"
+    },
+    {
+      "id": 2,
+      "points": "4000",
+      "user": "Israel"
+    },
+    {
+      "id": 3,
+      "points": "6000",
+      "user": "Juan"
+    },
+    {
+      "id": 4,
+      "points": "3900",
+      "user": "Jooj"
+    },
+    {
+      "id": 5,
+      "points": "3500",
+      "user": "Fernando"
+    },
+    {
+      "id": 6,
+      "points": "3800",
+      "user": "Matheus"
+    },
+    {
+      "id": 7,
+      "points": "5200",
+      "user": "Rubens"
+    },
+    {
+      "id": 8,
+      "points": "2000",
+      "user": "Carlitos"
+    }
+  ]
+}
