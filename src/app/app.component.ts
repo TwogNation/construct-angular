@@ -1,20 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { HttpService } from './services/http/http.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'construct-angular';
+  scores$: Observable<any> = this.http.get('/api/scores');
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    //private httpService: HttpService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    this.httpService.sendGetRequest().subscribe((responseBody: any) => {
-      console.log(responseBody);
-    });
+    // this.httpService.sendGetRequest().subscribe((responseBody: any) => {
+    //   console.log(responseBody);
+    // });
   }
 
   /*token() {

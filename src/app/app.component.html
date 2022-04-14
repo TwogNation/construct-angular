@@ -422,14 +422,23 @@
       />
     </svg>
   </div>
-
+  <br />
   <!-- iFrame -->
   <iframe
     src="http://localhost:3000"
     frameborder="0"
-    height="720"
-    width="1280"
+    height="400"
+    width="710"
   ></iframe>
+
+  <!-- Scores -->
+  <div>
+    <h2>Scores</h2>
+    <div *ngFor="let score of scores$ | async">
+      <h3>{{ score.user }}</h3>
+      <p>{{ score.points }}</p>
+    </div>
+  </div>
 
   <!-- Resources -->
 </div>
