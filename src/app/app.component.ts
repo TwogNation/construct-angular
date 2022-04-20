@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from './services/http/http.service';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
@@ -9,9 +16,15 @@ import { map } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'construct-angular';
   scores$: Observable<any> = this.http.get('/api/scores');
+  gameFrameData: any;
+  iframe: any;
+  myScore: any;
+  @ViewChild('gameFrame', { static: false }) gameFrame:
+    | ElementRef<any>
+    | undefined;
 
   constructor(
     //private httpService: HttpService,
@@ -19,11 +32,14 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
+    this.gameFrameData = this.gameFrame?.nativeElement;
+    this.iframe = this.gameFrameData.contentDocument;
+    this.myScore = this.iframe.Score;
+    console.log(this.myScore);
     // this.httpService.sendGetRequest().subscribe((responseBody: any) => {
     //   console.log(responseBody);
     // });
   }
-
   /*token() {
     // 1. access token variable from C3
     const token = 123456789;

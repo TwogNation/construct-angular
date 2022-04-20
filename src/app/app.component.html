@@ -426,6 +426,7 @@
   <!-- iFrame -->
   <iframe
     src="http://localhost:3000"
+    #gameFrame
     frameborder="0"
     height="400"
     width="710"
@@ -433,6 +434,9 @@
 
   <!-- Scores -->
   <div>
+    <h1 *ngIf="myScore">My Score: {{ myScore }}</h1>
+    <h1 *ngIf="!myScore">My Score: none</h1>
+    <p></p>
     <h2>Scores</h2>
     <div *ngFor="let score of scores$ | async">
       <h3>{{ score.user }}</h3>
