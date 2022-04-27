@@ -434,8 +434,8 @@
 
   <!-- Scores -->
   <div>
-    <h1 *ngIf="myScore">My Score: {{ myScore }}</h1>
-    <h1 *ngIf="!myScore">My Score: none</h1>
+    <h1>My Score: {{ myScore }}</h1>
+    <!-- <h1 *ngIf="!myScore">My Score: none</h1> -->
     <p></p>
     <h2>Scores</h2>
     <div *ngFor="let score of scores$ | async">

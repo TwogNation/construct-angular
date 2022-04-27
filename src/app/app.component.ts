@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from './services/http/http.service';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   OnChanges,
@@ -16,15 +17,16 @@ import { map } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'construct-angular';
-  scores$: Observable<any> = this.http.get('/api/scores');
+  scores$: Observable<any> = this.http.get('api/scores');
   gameFrameData: any;
   iframe: any;
+  iframeData: any;
   myScore: any;
-  @ViewChild('gameFrame', { static: false }) gameFrame:
-    | ElementRef<any>
-    | undefined;
+  @ViewChild('gameFrame', { static: false })
+  gameFrame!: ElementRef<any>;
+  localStore: any;
 
   constructor(
     //private httpService: HttpService,
@@ -32,14 +34,20 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameFrameData = this.gameFrame?.nativeElement;
-    this.iframe = this.gameFrameData.contentDocument;
-    this.myScore = this.iframe.Score;
-    console.log(this.myScore);
-    // this.httpService.sendGetRequest().subscribe((responseBody: any) => {
-    //   console.log(responseBody);
-    // });
+    this.iFrameRead();
   }
+
+  iFrameRead() {
+    window.addEventListener(
+      'message',
+      (event) => {
+        this.myScore = event.data;
+      },
+      false
+    );
+  }
+  ngAfterViewInit(): void {}
+
   /*token() {
     // 1. access token variable from C3
     const token = 123456789;

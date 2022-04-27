@@ -2,17 +2,17 @@
   "scores": [
     {
       "id": 1,
-      "points": "5000",
+      "points": 5000,
       "user": "Miguel"
     },
     {
       "id": 2,
-      "points": "4000",
+      "points": 4000,
       "user": "Israel"
     },
     {
       "id": 3,
-      "points": "3000",
+      "points": 3000,
       "user": "Juan"
     }
   ]
