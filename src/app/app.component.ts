@@ -1,16 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpService } from './services/http/http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnChanges,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { Game } from './models/game';
 
 @Component({
   selector: 'app-root',
@@ -19,34 +16,75 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'construct-angular';
-  scores$: Observable<any> = this.http.get('api/scores');
+  scores?: Observable<any>;
   gameFrameData: any;
   iframe: any;
   iframeData: any;
   myScore: any;
   @ViewChild('gameFrame', { static: false })
   gameFrame!: ElementRef<any>;
-  localStore: any;
+  localScores: any;
+  myGame?: Game;
+  playerName: any;
+  id: any;
 
-  constructor(
-    //private httpService: HttpService,
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.iFrameRead();
+    this.playerName = '?';
+    this.getGames();
+    console.log('games are: ' + this.scores);
   }
 
-  iFrameRead() {
+  iFrameRead(): void {
     window.addEventListener(
       'message',
       (event) => {
         this.myScore = event.data;
+        console.log('my score is:');
+        console.log(this.myScore);
+
+        this.postGame(this.myScore);
       },
       false
     );
   }
-  ngAfterViewInit(): void {}
+
+  getName(name: any): void {
+    this.playerName = name;
+  }
+
+  ngAfterViewInit(): void {
+    this.iFrameRead();
+  }
+
+  getGames(): void {
+    this.scores = this.http.get('/api/scores');
+    console.log('getGames passed');
+    this.localScores = this.scores;
+  }
+
+  postGame(myScore: any): void {
+    this.id = Date.now();
+    this.myGame = {
+      id: this.id,
+      user: this.playerName,
+      points: myScore,
+    };
+    console.log('my game is:');
+    console.log(this.myGame);
+    this.http.post<Game>('/api/scores', this.myGame, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    });
+    console.log('http post passed');
+
+    // console.log('local scores:');
+    // console.log(this.localScores);
+    // this.localScores?.push(this.myGame);
+    // console.log('local scores: ' + this.localScores);
+  }
 
   /*token() {
     // 1. access token variable from C3

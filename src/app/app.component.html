@@ -314,6 +314,16 @@
   />
   <span>Welcome</span>
   <div class="spacer"></div>
+  <p>Login</p>
+  <input type="text" #name name="name" placeholder="name" />
+  <input
+    type="password"
+    #password
+    [name]="password"
+    placeholder="password
+  "
+  />
+  <button (click)="getName(name.value)">Submit</button>
   <a
     aria-label="Angular on twitter"
     target="_blank"
@@ -434,11 +444,16 @@
 
   <!-- Scores -->
   <div>
-    <h1>My Score: {{ myScore }}</h1>
-    <!-- <h1 *ngIf="!myScore">My Score: none</h1> -->
+    <div>
+      <h1>Player Name: {{ this.playerName }}</h1>
+    </div>
     <p></p>
     <h2>Scores</h2>
-    <div *ngFor="let score of scores$ | async">
+    <div *ngIf="myScore >= 0">
+      <h3>{{ this.playerName }}'s New Score:</h3>
+      <p>{{ myScore }}</p>
+    </div>
+    <div *ngFor="let score of localScores | async">
       <h3>{{ score.user }}</h3>
       <p>{{ score.points }}</p>
     </div>

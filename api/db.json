@@ -1,19 +1,16 @@
 {
   "scores": [
     {
-      "id": 1,
-      "points": 5000,
-      "user": "Miguel"
+      "user": "Sebastian",
+      "points": 500
     },
     {
-      "id": 2,
-      "points": 4000,
-      "user": "Israel"
+      "user": "Dragomir",
+      "points": 400
     },
     {
-      "id": 3,
-      "points": 3000,
-      "user": "Juan"
+      "user": "Aleksa",
+      "points": 300
     }
   ]
 }
